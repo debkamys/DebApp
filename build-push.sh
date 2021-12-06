@@ -1,30 +1,47 @@
 #!/bin/bash
 
-echo "I'm building the code!"
 
-dotnet build
-
-
-echo "I'm testing the code!"
-
-dotnet test
+# Set the color for output
+magenta='\033[0;35m'
+cyan='\033[0;36m'
+# Clear color
+clear='\033[0m'
 
 
-echo "I'm publishing the code!"
 
-dotnet publish -c Release
+echo -e "${magenta}Let's build the code!${clear}" && sleep 1
 
-
-echo "I'm building my image!"
-
-docker build -t debtest-image -f Dockerfile .
+dotnet build && sleep 2
 
 
-echo "I'm tagging my image!"
 
-docker tag debtest-image gcr.io/gke-deb/debtest-image
+echo -e "${cyan}Let's test the code!${clear}" && sleep 1
+
+dotnet test && sleep 2
 
 
-echo "I'm pushing my image to an external container registry!"
+
+echo -e "${magenta}Let's publish the code!${clear}" && sleep 1
+
+dotnet publish -c Release && sleep 2
+
+
+
+echo -e "${cyan}Let's build an image!${clear}" && sleep 1
+
+docker build -t debtest-image -f Dockerfile . && sleep 2
+
+
+
+echo -e "${magenta}Let's tag that image!${clear}" && sleep 1
+
+docker tag debtest-image gcr.io/gke-deb/debtest-image && sleep 2
+
+
+
+echo -e "${cyan}Let's push that image to an external container registry!" && sleep 1
 
 docker push gcr.io/gke-deb/debtest-image
+
+
+echo -e "${magenta}ALL DONE!!!${clear}"
