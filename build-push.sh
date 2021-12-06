@@ -39,7 +39,7 @@ docker tag debtest-image gcr.io/gke-deb/debtest-image && sleep 2
 
 
 
-echo -e "${cyan}Let's push that image to an external container registry!" && sleep 1
+echo -e "${cyan}Let's push that image to an external container registry!${clear}" && sleep 1
 
 docker push gcr.io/gke-deb/debtest-image
 
